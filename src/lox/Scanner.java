@@ -75,6 +75,11 @@ public class Scanner {
           while (peek() != '\n' && !isAtEnd()) {
             advance();
           }
+        } else if(match('*')) { // block comments (does not work)
+          while (peek() != '*' && peekNext() != '/' && !isAtEnd()) {
+            advance();
+          }
+          advance(); advance();
         } else {
           addToken(TokenType.SLASH);
         }
@@ -124,14 +129,6 @@ public class Scanner {
     addToken(TokenType.NUMBER, Double.parseDouble(source.substring(start, current)));
   }
 
-  private char peekNext() {
-    if (current + 1 >= source.length()) {
-      return '\0';
-    }
-
-    return source.charAt(current + 1);
-  }
-
   private boolean isAlphaNumeric(char c) {
     return isAlpha(c) || isDigit(c);
   }
@@ -162,6 +159,14 @@ public class Scanner {
 
     String value = source.substring(start + 1, current - 1);
     addToken(TokenType.STRING, value);
+  }
+
+  private char peekNext() {
+    if (current + 1 >= source.length()) {
+      return '\0';
+    }
+
+    return source.charAt(current + 1);
   }
 
   private char peek() {
