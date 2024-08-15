@@ -45,10 +45,10 @@ public class Scanner {
       case '+': addToken(TokenType.PLUS); break;
       case ';': addToken(TokenType.SEMICOLON); break;
       case '*': addToken(TokenType.STAR); break; 
-      case '!': addToken(match('=') ? TokenType.BANG_EQUAL: TokenType.BANG); break;
-      case '=': addToken(match('=') ? TokenType.EQUAL_EQUAL: TokenType.EQUAL); break;
-      case '<': addToken(match('=') ? TokenType.LESS_EQUAL: TokenType.LESS); break;
-      case '>': addToken(match('=') ? TokenType.GREATER_EQUAL: TokenType.GREATER); break;
+      case '!': addToken(match('=') ? TokenType.BANG_EQUAL : TokenType.BANG); break;
+      case '=': addToken(match('=') ? TokenType.EQUAL_EQUAL : TokenType.EQUAL); break;
+      case '<': addToken(match('=') ? TokenType.LESS_EQUAL : TokenType.LESS); break;
+      case '>': addToken(match('=') ? TokenType.GREATER_EQUAL : TokenType.GREATER); break;
       case '/':
         if (match('/')) {
           while (peek() != '\n' && !isAtEnd()) {
@@ -63,8 +63,41 @@ public class Scanner {
       case '\t': break;
       case '\n': ++line; break;
       case '"': string(); break;
-      default: Lox.error(line, "Unexpected character"); break;
+      default: 
+        if (isDigit(c)) {
+          number();
+        } else {
+          Lox.error(line, "Unexpected character"); break;
+        }
     }
+  }
+
+  private void number() {
+    while (isDigit(peek())) {
+      advance();
+    }
+
+    if (peek() == '.' && isDigit(peekNext())) {
+      advance();
+    }
+
+    while (isDigit(peek()))  {
+      advance();
+    }
+
+    addToken(TokenType.NUMBER, Double.parseDouble(source.substring(start, current)));
+  }
+
+  private char peekNext() {
+    if (current + 1 >= source.length()) {
+      return '\0';
+    }
+
+    return source.charAt(current + 1);
+  }
+
+  private boolean isDigit(char c) {
+    return c >= '0' && c <= '9';
   }
 
   private void string() {

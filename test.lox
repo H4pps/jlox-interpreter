@@ -1,4 +1,6 @@
 // this is a comment
 (( )){} // grouping stuff
 !*+-/=<> <= == // operators
-"something"
+"something" // this is a string
+1234.1234 // this is a number
+1234 // this is also a number
