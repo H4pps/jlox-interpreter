@@ -8,6 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+import lox.Scanner.Scanner;
+import lox.token.Token;
+
 public class Lox {
   static boolean hadError = false; // it is better to have some kind of "ErrorReporter" interface
   public static void main(String[] args) throws IOException {

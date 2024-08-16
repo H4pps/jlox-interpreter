@@ -1,9 +1,13 @@
-package lox;
+package lox.Scanner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import lox.Lox;
+import lox.token.Token;
+import lox.token.TokenType;
 
 public class Scanner {
   private static final Map<String, TokenType> keywords;
@@ -33,7 +37,7 @@ public class Scanner {
   private int current = 0; // character currently being considered
   private int line = 1; // tracks the source line
 
-  Scanner(String source) {
+  public Scanner(String source) {
     this.source = source; // sotring a raw code
   }
 
