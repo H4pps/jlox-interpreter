@@ -1,4 +1,4 @@
-package lox.Scanner;
+package lox.scanner;
 
 import java.util.ArrayList;
 import java.util.HashMap;

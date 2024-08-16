@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import lox.Scanner.Scanner;
+import lox.scanner.Scanner;
 import lox.token.Token;
 
 public class Lox {
