@@ -3,7 +3,7 @@ package lox.parser;
 import lox.token.Token;
 import lox.token.TokenType;
 
-class AstPrinter implements Expr.Visitor<String> {
+public class AstPrinter implements Expr.Visitor<String> {
   public static void main(String[] args) {
     Expr expression = new Expr.Binary(
         new Expr.Unary(
@@ -16,14 +16,13 @@ class AstPrinter implements Expr.Visitor<String> {
     System.out.println(new AstPrinter().print(expression));
   }
 
-  String print(Expr expr) {
+  public String print(Expr expr) {
     return expr.accept(this);
   }
 
   @Override
   public String visitBinaryExpr(Expr.Binary expr) {
-    return parenthesize(expr.operator.lexeme,
-                        expr.left, expr.right);
+    return parenthesize(expr.operator.lexeme, expr.left, expr.right);
   }
 
   @Override
