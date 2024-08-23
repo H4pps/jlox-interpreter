@@ -13,10 +13,15 @@ import lox.token.Token;
 import lox.token.TokenType;
 import lox.parser.Expr;
 import lox.parser.Parser;
+import lox.interpreter.Interpreter;
+import lox.interpreter.errors.runtime.RuntimeError;
 import lox.parser.AstPrinter;
 
 public class Lox {
+  private static final Interpreter interpreter = new Interpreter();
+
   static boolean hadError = false; // it is better to have some kind of "ErrorReporter" interface
+  static boolean hadRuntimeError = false;
   public static void main(String[] args) throws IOException {
     if (args.length > 1) {
       System.out.println("Usage: jlox [script]");
@@ -35,6 +40,9 @@ public class Lox {
 
     if (hadError) {
       System.exit(65);
+    }
+    if (hadRuntimeError) {
+      System.exit(70);
     }
   }
 
@@ -61,10 +69,12 @@ public class Lox {
       return;
     }
 
-    System.out.println(new AstPrinter().print(expression));
-    // for (Token token : tokens) {
-    //   System.out.println(token);
-    // }
+    interpreter.interpret(expression);
+  }
+
+  public static void runtimeError(RuntimeError error) {
+    System.err.println(error.getMessage() + "\n[line " + error.token.line + "]");
+    hadRuntimeError = true;
   }
 
   public static void error(int line, String message) {
