@@ -20,6 +20,11 @@ public class GenerateAST {
       "Literal  : Object value",
       "Unary    : Token operator, Expr right"
     ));
+
+    defineAST(outputDir, "Stmt", Arrays.asList(
+      "Expression : Expr expression",
+      "Print      : Expr expression"
+    ));
   }
 
   private static void defineAST(String outputDir, String baseName, List<String> types)
@@ -67,7 +72,7 @@ public class GenerateAST {
     writer.println("  public static class " + className + " extends " + baseName + " {");
 
     // constructor
-    writer.println("    " + className + "(" + fieldList + ") {");
+    writer.println("    public " + className + "(" + fieldList + ") {");
 
     // fields initialization
     String[] fields = fieldList.split(", ");

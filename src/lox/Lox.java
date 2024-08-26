@@ -13,9 +13,9 @@ import lox.token.Token;
 import lox.token.TokenType;
 import lox.parser.Expr;
 import lox.parser.Parser;
+import lox.parser.Stmt;
 import lox.interpreter.Interpreter;
 import lox.interpreter.errors.runtime.RuntimeError;
-import lox.parser.AstPrinter;
 
 public class Lox {
   private static final Interpreter interpreter = new Interpreter();
@@ -63,13 +63,13 @@ public class Lox {
     Scanner scanner = new Scanner(source);
     List<Token> tokens = scanner.scanTokens();
     Parser parser = new Parser(tokens);
-    Expr expression = parser.parse();
+    List<Stmt> statements = parser.parse();
 
     if (hadError) {
       return;
     }
 
-    interpreter.interpret(expression);
+    interpreter.interpret(statements);
   }
 
   public static void runtimeError(RuntimeError error) {

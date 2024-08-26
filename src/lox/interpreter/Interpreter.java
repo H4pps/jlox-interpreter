@@ -1,19 +1,42 @@
 package lox.interpreter;
 
+import java.util.List;
+
 import lox.Lox;
 import lox.interpreter.errors.runtime.RuntimeError;
 import lox.parser.Expr;
+import lox.parser.Stmt;
 import lox.token.Token;
 
-public class Interpreter implements Expr.Visitor<Object> {
-  public void interpret(Expr expression) { 
+public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
+  public void interpret(List<Stmt> statements) {
     try {
-      Object value = evaluate(expression);
-      System.out.println(stringify(value));
+      for (Stmt statement : statements) {
+        execute(statement);
+      }
     } catch (RuntimeError error) {
       Lox.runtimeError(error);
+    } catch (Exception error) {
+      System.out.println(error);
     }
-  }  
+  }
+
+  public void execute(Stmt stmt) {
+    stmt.accept(this);
+  }
+
+  @Override
+  public Void visitPrintStmt(Stmt.Print stmt) {
+    Object value = evaluate(stmt.expression);
+    System.out.println(stringify(value));
+    return null;
+  }
+
+  @Override
+  public Void visitExpressionStmt(Stmt.Expression stmt) {
+    evaluate(stmt.expression);
+    return null;
+  }
 
   @Override
   public Object visitLiteralExpr(Expr.Literal expr) {
