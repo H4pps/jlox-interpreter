@@ -11,11 +11,10 @@ import java.util.List;
 import lox.scanner.Scanner;
 import lox.token.Token;
 import lox.token.TokenType;
-import lox.parser.Expr;
 import lox.parser.Parser;
 import lox.parser.Stmt;
+import lox.errors.runtime.RuntimeError;
 import lox.interpreter.Interpreter;
-import lox.interpreter.errors.runtime.RuntimeError;
 
 public class Lox {
   private static final Interpreter interpreter = new Interpreter();

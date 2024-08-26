@@ -1,4 +1,4 @@
-package lox.interpreter.errors.runtime;
+package lox.errors.runtime;
 
 import lox.token.Token;
 
