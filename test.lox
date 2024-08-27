@@ -1,6 +1,5 @@
-var a = "iurii";
-{
-  var a = 1;
-  print a;
+if (false) {
+  print "we are in the then branch";
+} else {
+  print "we are in the else branch";
 }
-print a;
