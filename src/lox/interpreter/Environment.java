@@ -43,7 +43,7 @@ public class Environment {
 
     if (enclosing != null) {
       enclosing.assign(name, value);
-      // return;
+      return;
     }
 
     throw new RuntimeError(name,
