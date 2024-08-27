@@ -7,6 +7,7 @@ import lox.errors.runtime.RuntimeError;
 import lox.parser.Expr;
 import lox.parser.Stmt;
 import lox.token.Token;
+import lox.token.TokenType;
 
 public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
   private Environment environment = new Environment();
@@ -23,8 +24,18 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     }
   }
 
-  public void execute(Stmt stmt) {
-    stmt.accept(this);
+
+  @Override
+  public Object visitLogicalExpr(Expr.Logical expr) {
+    Object left = evaluate(expr.left);
+
+    if (expr.operator.type == TokenType.OR) {
+      if (isTruthy(left)) return left;
+    } else {
+      if (!isTruthy(left)) return left;
+    }
+
+    return evaluate(expr.right);
   }
 
   @Override
@@ -210,5 +221,9 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
   private Object evaluate(Expr expr) {
     return expr.accept(this);
+  }
+
+  public void execute(Stmt stmt) {
+    stmt.accept(this);
   }
 }

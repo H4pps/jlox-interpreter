@@ -1,5 +1,5 @@
 if (false) {
-  print "we are in the then branch";
+  print "true";
 } else {
-  print "we are in the else branch";
+  print "false"; 
 }
