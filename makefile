@@ -9,3 +9,6 @@ utree:
 
 uptree:
 	cd src && javac lox/parser/AstPrinter.java && java lox/parser/AstPrinter && find . -type f -name '*.class' -delete
+
+rem:
+	find . -type f -name '*.class' -delete

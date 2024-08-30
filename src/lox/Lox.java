@@ -61,13 +61,16 @@ public class Lox {
   private static void run(String source) {
     Scanner scanner = new Scanner(source);
     List<Token> tokens = scanner.scanTokens();
+    System.out.println("tokenization complete");
     Parser parser = new Parser(tokens);
     List<Stmt> statements = parser.parse();
+    System.out.println("parsing complete");
 
     if (hadError) {
       return;
     }
 
+    System.out.println("started interpretator");
     interpreter.interpret(statements);
   }
 
