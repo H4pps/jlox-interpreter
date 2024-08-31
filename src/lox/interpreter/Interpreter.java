@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import lox.Lox;
 import lox.errors.runtime.RuntimeError;
+import lox.interpreter.callables.LoxCallable;
+import lox.interpreter.callables.LoxFunction;
 import lox.parser.Expr;
 import lox.parser.Stmt;
 import lox.token.Token;
@@ -43,6 +45,13 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     } catch (Exception error) {
       System.out.println(error);
     }
+  }
+
+  @Override
+  public Void visitFunctionStmt(Stmt.Function stmt) {
+    LoxFunction function = new LoxFunction(stmt);
+    environment.define(stmt.name.lexeme, function);
+    return null;
   }
 
   @Override
@@ -103,7 +112,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     return null;
   }
 
-  void executeBlock(List<Stmt> statements, Environment environment) {
+  public void executeBlock(List<Stmt> statements, Environment environment) {
     Environment previous = this.environment;
     try {
       this.environment = environment;

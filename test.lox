@@ -1,1 +1,6 @@
-print clock();
+add(2, 2);
+fun add(a, b) {
+  print a + b; 
+}
+
+add(1, 2);
