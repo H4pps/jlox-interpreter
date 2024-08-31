@@ -4,6 +4,7 @@ import java.util.List;
 
 import lox.interpreter.Environment;
 import lox.interpreter.Interpreter;
+import lox.interpreter.Return;
 import lox.parser.Stmt;
 
 public class LoxFunction implements LoxCallable {
@@ -20,7 +21,11 @@ public class LoxFunction implements LoxCallable {
       environment.define(declaration.params.get(i).lexeme, arguments.get(i));
     }
 
-    interpreter.executeBlock(declaration.body, environment);
+    try {
+      interpreter.executeBlock(declaration.body, environment);
+    } catch (Return returnValue) {
+      return returnValue.value;
+    }
     return null;
   }
 
