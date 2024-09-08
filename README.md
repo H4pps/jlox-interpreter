@@ -26,16 +26,3 @@ To build and run the interpreter, you can use the provided Makefile commands:
   ```sh
   make rem
   ```
-
-### Usage
-You can run the interpreter in two modes: interactive prompt and script mode.
-
-- **Interactive Prompt:**
-  ```sh
-  java lox.Lox
-  ```
-
-- **Script Mode:**
-  ```sh
-  java lox.Lox path/to/your/script.lox
-  ```
