@@ -12,7 +12,7 @@ jlox-interpreter is an implementation of the Lox programming language in Java. W
 ### Building and Running
 To build and run the interpreter, you can use the provided Makefile commands:
 
-- **Run the interpreter without a script:**
+- **Run the interpreter with REPL:**
   ```sh
   make ub
   ```
@@ -20,16 +20,6 @@ To build and run the interpreter, you can use the provided Makefile commands:
 - **Run the interpreter with a script:**
   ```sh
   make ubf
-  ```
-
-- **Generate the AST classes:**
-  ```sh
-  make utree
-  ```
-
-- **Run the AST printer:**
-  ```sh
-  make uptree
   ```
 
 - **Clean up compiled class files:**
