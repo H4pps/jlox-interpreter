@@ -1,18 +1,7 @@
 # jlox-interpreter
 
 ## Overview
-jlox-interpreter is an implementation of the Lox programming language, as described in the book "Crafting Interpreters" by Robert Nystrom. This project includes a scanner, parser, interpreter, and error handling for the Lox language.
-
-## Project Structure
-The project is organized into several packages, each responsible for different aspects of the interpreter:
-
-- `lox`: Contains the main entry point and overall control logic.
-- `lox.scanner`: Responsible for lexical analysis, converting source code into tokens.
-- `lox.token`: Defines the `Token` class and `TokenType` enum.
-- `lox.parser`: Handles syntax analysis, converting tokens into an abstract syntax tree (AST).
-- `lox.interpreter`: Executes the AST, implementing the semantics of the Lox language.
-- `lox.errors.runtime`: Contains runtime error handling classes.
-- `lox.interpreter.callables`: Defines callable entities like functions.
+jlox-interpreter is an implementation of the Lox programming language in Java. Written as part of the book "Crafting Interpreters" by Robert Nystrom with some modifications.
 
 ## Getting Started
 
@@ -60,8 +49,3 @@ You can run the interpreter in two modes: interactive prompt and script mode.
   ```sh
   java lox.Lox path/to/your/script.lox
   ```
-
-## Code Overview
-
-### Main Class
-The main entry point of the interpreter is the `Lox` class:
